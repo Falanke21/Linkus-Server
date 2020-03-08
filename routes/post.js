@@ -5,8 +5,18 @@ const { mongoose } = require('../db/mongoose')
 
 /* POST login. */
 router.post('/', function(req, res, next) {
-	const email = req.body.email;
-	const password = req.body.password;
+	const user = new User({
+		category: req.body.category,
+		publisher: req.body.publisher,
+		type: req.body.type,
+		courseId: req.body.courseId,
+		sectionId: req.body.sectionId,
+		content: req.body.content,
+		privacy: req.body.privacy,
+		status: req.body.status,
+		attended: [],
+		requested: []
+	})
 
 	User.findByEmailPassword(email, password).then((user) => {
 	    if (!user) {

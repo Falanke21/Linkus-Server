@@ -7,36 +7,38 @@ const mongoose = require('mongoose')
 // Allows us to add additional functionality.
 const PostSchema = new mongoose.Schema({
     category: {
-        type: String,
+        type: String
     },
 
     publisher: {
         type: String,
-        required: true,
+        required: true
     },
     type: {
-        type: Number,
+        type: Number
     },
     courseId: {
-        type: String,
+        type: String
     },
     sectionId: {
-        type: String,
+        type: String
     },
     content: {
-        type: String,
+        type: String
     },
     publishTime: {
         type: Date,
+        default: Date.now
     },
     activateTime: {
         type: Date,
+        default: Date.now
     },
     privacy: {
-        type: Boolean,
+        type: Boolean
     },
     status: {
-        type: Number,
+        type: Number
     },
     attended: [{memberId: String}],
     requested: [{reqId: String, message: String}]
