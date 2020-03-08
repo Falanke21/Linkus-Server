@@ -8,18 +8,36 @@ const mongoose = require('mongoose')
 const PostSchema = new mongoose.Schema({
     category: {
         type: String,
-        required: true,
     },
 
-    publisher: String,
-    type: Number,
-    courseId: String,
-    sectionId: String,
-    content: String,
-    publishTime: Date,
-    activateTime: Date,
-    privacy: Boolean,
-    status: Number,
+    publisher: {
+        type: String,
+        required: true,
+    },
+    type: {
+        type: Number,
+    },
+    courseId: {
+        type: String,
+    },
+    sectionId: {
+        type: String,
+    },
+    content: {
+        type: String,
+    },
+    publishTime: {
+        type: Date,
+    },
+    activateTime: {
+        type: Date,
+    },
+    privacy: {
+        type: Boolean,
+    },
+    status: {
+        type: Number,
+    },
     attended: [{memberId: String}],
     requested: [{reqId: String, message: String}]
 })
