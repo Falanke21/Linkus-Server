@@ -9,11 +9,13 @@ const mongoURI =
     process.env.MONGODB_URI || "mongodb://localhost:27017/LinkusApi";
 
 console.log(`mongoURL is ${mongoURI}`);
-mongoose.connect(mongoURI, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-    useCreateIndex: true,
-});
-console.log("MongoDB is Connected...");
+mongoose
+    .connect(mongoURI, {
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+        useCreateIndex: true,
+    })
+    .then(() => console.log("Database Connected Successfully"))
+    .catch((err) => console.log(err));
 
 module.exports = { mongoose }; // Export the active connection.
