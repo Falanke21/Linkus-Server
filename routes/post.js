@@ -2,6 +2,7 @@ var express = require("express");
 var router = express.Router();
 const { Post } = require("../models/post");
 const { mongoose } = require("../db/mongoose");
+const ObjectID = require("mongodb").ObjectID;
 
 /* POST a new post. */
 router.post("/", function (req, res, next) {
@@ -31,7 +32,7 @@ router.post("/", function (req, res, next) {
 
 /* GET all posts. */
 router.get("/", async (req, res, next) => {
-	// Promise style code: 
+    // Promise style code:
     // Post.find().then((result) => {
     // 	res.send(result);
     // }).catch((err) => {
@@ -39,9 +40,23 @@ router.get("/", async (req, res, next) => {
     // 	res.status(500).send();
     // });
 
-	// async/await style code:
+    // async/await style code:
     const result = await Post.find();
     res.send(result);
+});
+
+/* GET one post with ID. */
+router.get("/:id", async (req, res, next) => {
+    // async/await style code:
+    try {
+        if (!ObjectID.isValid(req.params.id)) {
+            return next({ error: "ID is not valid" });
+        }
+        const result = await Post.findById(req.params.id);
+        res.send(result);
+    } catch (error) {
+        return next(error);
+    }
 });
 
 module.exports = router;
